@@ -4,19 +4,36 @@
 require_once '../database/conn.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
-    $password = password_hash($_POST["wachtwoord"], PASSWORD_DEFAULT); // Hash the password for security
+    $password = password_hash($_POST["wachtwoord"], PASSWORD_DEFAULT);
     $gebruikernaam = $_POST["gebruikernaam"];
+    $subscription = isset($_GET['subscription']);
+    
+    $subscriptionType = "";
+    switch ($subscription) {
+        case 1:
+            $subscriptionType = "Basic";
+            $price = 9.99;
+            break;
+        case 2:
+            $subscriptionType = "Standard";
+            $price = 13.99;
+            break;
+        case 3:
+            $subscriptionType = "Premium";
+            $price = 17.99;
+            break;
+    }
 
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-
         try {
             $startDate = date("Y-m-d");
             $endDate = date("Y-m-d", strtotime("+1 day"));
-            $stmt = $conn->prepare("INSERT INTO user (email, gebruikernaam, wachtwoord, start_date) VALUES (:email, :gebruikernaam, :password, :startDate)");
+            $stmt = $conn->prepare("INSERT INTO user (email, gebruikernaam, wachtwoord, start_date, subscribsie) VALUES (:email, :gebruikernaam, :password, :startDate, :subscriptionType)");
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':gebruikernaam', $gebruikernaam);
             $stmt->bindParam(':password', $password);
             $stmt->bindParam(':startDate', $startDate);
+            $stmt->bindParam(':subscriptionType', $subscriptionType);
             $stmt->execute();
             header("Location: sign_in.php");
             exit();
@@ -25,7 +42,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 }
-    
 ?>
 
 

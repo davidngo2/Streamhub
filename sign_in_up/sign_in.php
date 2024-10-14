@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email']) && isset($_PO
             <div class="flex justify-center">
                 <img class="w-48" src="../img/logo.png"></img>
             </div>
-            <p class="text-center text-gray-400">Don't have an account? <a href="sign_up_user.php" class="text-yellow-500 hover:underline">Sign Up</a></p>
+            <p class="text-center text-gray-400">Don't have an account? <a href="sign_up_info.php" class="text-yellow-500 hover:underline">Sign Up</a></p>
             <div class="flex justify-center items-center">
                 <hr class="w-1/4 border-gray-600">
                 <span class="px-4 text-gray-400 text-center mt-4 mb-4">OR ELSE</span>
