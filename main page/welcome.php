@@ -14,7 +14,7 @@ if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 }
 $movieId = $user_id;
-$query = $conn->query("SELECT * FROM user WHERE id = " . $user_id);
+$query = $conn->query("SELECT * FROM users WHERE user_id = " . $user_id);
 while ($data = $query->fetch()) {
     $name = $data['gebruikernaam'];
 }
@@ -26,8 +26,8 @@ while ($data = $query->fetch()) {
         <section class="container mx-auto p-4">
             <div class="gap-10 mt-6 flex items-center justify-center">
                 <div class="group cursor-pointer">
-                    <a href="../animation/ani.php">
-                        <img src="../img/profile.jpg" alt="Profile" class="w-44 h-44 mx-auto">
+                    <a href="../animation/animation.php">
+                        <img src="../Profile img/profile.jpeg" alt="Profile" class="w-44 h-44 mx-auto">
                     </a>
                     <p class="text-xl font-semibold text-center mt-2 group-hover:text-red-500"><?php echo $name ?></p>
                 </div>

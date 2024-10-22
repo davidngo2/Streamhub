@@ -4,36 +4,58 @@ CREATE DATABASE streamhub;
 
 USE streamhub;
 
-CREATE TABLE user (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(100) NOT NULL,
     gebruikernaam VARCHAR(255) NOT NULL,
     wachtwoord VARCHAR(255) NOT NULL,
+    is_admin BOOLEAN DEFAULT 0,
     start_date DATE NOT NULL,
     subscribsie VARCHAR(255) NOT NULL,
     eind_date DATE NOT NULL
 );
--- Tabel voor gebruikers (User Accounts & Authenticatie)
-CREATE TABLE users (
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) UNIQUE NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    is_admin BOOLEAN DEFAULT 0,
-    -- Gebruiker is admin als dit op TRUE staat
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
 
 -- Tabel voor video's (Video Library)
-CREATE TABLE videos (
-    video_id INT AUTO_INCREMENT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    description TEXT,
-    genre VARCHAR(100),
-    category VARCHAR(100),
-    release_year YEAR,
-    popularity_score INT DEFAULT 0,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE now_playing_movies (
+    video_id INT PRIMARY KEY,
+    title VARCHAR(255),
+    release_date DATE,
+    original_language VARCHAR(10),
+    popularity FLOAT,
+    vote_average FLOAT,
+    vote_count INT,
+    genre_names VARCHAR(255),
+    overview TEXT,
+    poster_path VARCHAR(255),
+    video_key VARCHAR(255)
+);
+
+CREATE TABLE discovered_movies (
+    id INT PRIMARY KEY,
+    title VARCHAR(255),
+    release_date DATE,
+    original_language VARCHAR(10),
+    popularity FLOAT,
+    vote_average FLOAT,
+    vote_count INT,
+    genre_names TEXT,
+    overview TEXT,
+    poster_path VARCHAR(255),
+    video_key VARCHAR(255)
+);
+
+CREATE TABLE top_rated (
+    id INT PRIMARY KEY,
+    title VARCHAR(255),
+    release_date DATE,
+    original_language VARCHAR(10),
+    popularity FLOAT,
+    vote_average FLOAT,
+    vote_count INT,
+    genre_names TEXT,
+    overview TEXT,
+    poster_path VARCHAR(255),
+    video_key VARCHAR(255)
 );
 
 -- Tabel voor favorieten (User Favorieten)
@@ -43,7 +65,7 @@ CREATE TABLE favorites (
     video_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (video_id) REFERENCES videos(video_id) ON DELETE CASCADE
+    FOREIGN KEY (video_id) REFERENCES now_playing_movies(video_id) ON DELETE CASCADE
 );
 
 -- Tabel voor afspeellijsten (Custom Playlists)
@@ -62,7 +84,7 @@ CREATE TABLE playlist_videos (
     video_id INT,
     added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (playlist_id) REFERENCES playlists(playlist_id) ON DELETE CASCADE,
-    FOREIGN KEY (video_id) REFERENCES videos(video_id) ON DELETE CASCADE
+    FOREIGN KEY (video_id) REFERENCES now_playing_movies(video_id) ON DELETE CASCADE
 );
 
 -- Tabel voor video's bekeken door gebruikers (User Watch History)
@@ -72,7 +94,7 @@ CREATE TABLE watch_history (
     video_id INT,
     watched_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (video_id) REFERENCES videos(video_id) ON DELETE CASCADE
+    FOREIGN KEY (video_id) REFERENCES now_playing_movies(video_id) ON DELETE CASCADE
 );
 
 -- Tabel voor admin acties (Admin Video Management)
@@ -84,7 +106,7 @@ CREATE TABLE admin_actions (
     video_id INT,
     action_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (admin_id) REFERENCES users(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (video_id) REFERENCES videos(video_id) ON DELETE CASCADE
+    FOREIGN KEY (video_id) REFERENCES now_playing_movies(video_id) ON DELETE CASCADE
 );
 
 -- Optionele tabel voor aanbevelingen (Recommendation System) - n-op-n relatie
@@ -94,5 +116,5 @@ CREATE TABLE recommendations (
     video_id INT,
     recommended_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (video_id) REFERENCES videos(video_id) ON DELETE CASCADE
+    FOREIGN KEY (video_id) REFERENCES now_playing_movies(video_id) ON DELETE CASCADE
 );

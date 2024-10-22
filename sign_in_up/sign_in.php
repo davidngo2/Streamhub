@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email']) && isset($_PO
     $password = $_POST['password'];
 
     // Database query
-    $sql = "SELECT * FROM user WHERE email=:email";
+    $sql = "SELECT * FROM users WHERE email=:email";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':email', $email);
     $stmt->execute();
@@ -24,9 +24,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email']) && isset($_PO
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($row && password_verify($password, $row['wachtwoord'])) {
-        $user_id = $row['id'];
+        $user_id = $row['user_id'];
         $_SESSION['user_id'] = $user_id;
-        header('Location: welcome.php');
+        header('Location: ../main page/welcome.php');
         exit;
     } else {
         echo "Inloggen mislukt.";
