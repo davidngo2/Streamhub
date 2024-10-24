@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         try {
             $startDate = date("Y-m-d");
             $endDate = date("Y-m-d", strtotime("+1 day"));
-            $stmt = $conn->prepare("INSERT INTO user (email, gebruikernaam, wachtwoord, start_date, subscribsie) VALUES (:email, :gebruikernaam, :password, :startDate, :subscriptionType)");
+            $stmt = $conn->prepare("INSERT INTO users (email, gebruikernaam, wachtwoord, start_date, subscribsie) VALUES (:email, :gebruikernaam, :password, :startDate, :subscriptionType)");
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':gebruikernaam', $gebruikernaam);
             $stmt->bindParam(':password', $password);
