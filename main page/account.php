@@ -8,6 +8,8 @@
 </head>
 
 <?php
+include_once('../sign_in_up/checkLogin.php');
+checkLogin();
 include_once '../database/conn.php';
 session_start();
 
