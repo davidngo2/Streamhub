@@ -100,7 +100,7 @@
                         <div class="p-4">
                             <h3 class="text-lg font-bold">' . $movie['title'] . '</h3>
                             <p class="text-sm text-gray-400">' . $movie['release_date'] . '</p>
-                            <p class="text-sm mt-2">' . $movie['overview'] . '</p>
+                            <p class="text-sm mt-2 truncate">' . $movie['overview'] . '</p>
                             <div class="flex justify-between items-center mt-4">
                                 <span class="text-yellow-500 font-semibold">' . $movie['vote_average'] . ' / 10</span>
                                 <span class="text-gray-400">' . $movie['vote_count'] . ' votes</span>
