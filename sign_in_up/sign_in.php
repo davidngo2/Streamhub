@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css">
 </head>
 <?php
-    session_start();
-    include_once('../database/conn.php');
+session_start();
+include_once('../database/conn.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email']) && isset($_POST['password'])) {
     $email = $_POST['email'];
@@ -24,15 +24,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['email']) && isset($_PO
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($row && password_verify($password, $row['wachtwoord'])) {
-        $user_id = $row['user_id'];
-        $_SESSION['user_id'] = $user_id;
-        header('Location: ../main page/welcome.php');
+        $_SESSION['user_id'] = $row['user_id'];  // Store the user ID in the session
+        header('Location: ../main page/welcome.php');  // Redirect to the welcome page after successful login
         exit;
     } else {
-        echo "Inloggen mislukt.";
+        echo "<p class='text-center text-red-500'>Inloggen mislukt.</p>";
     }
 }
 ?>
+
 
 <body class="bg-gray-900">
     <div class="flex min-h-screen">

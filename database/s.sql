@@ -15,7 +15,6 @@ CREATE TABLE users (
     eind_date DATE NOT NULL
 );
 
--- Tabel voor video's (Video Library)
 CREATE TABLE now_playing_movies (
     video_id INT PRIMARY KEY,
     title VARCHAR(255),
@@ -58,17 +57,17 @@ CREATE TABLE top_rated (
     video_key VARCHAR(255)
 );
 
--- Tabel voor favorieten (User Favorieten)
 CREATE TABLE favorites (
     favorite_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
     video_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (video_id) REFERENCES now_playing_movies(video_id) ON DELETE CASCADE
+    FOREIGN KEY (video_id) REFERENCES now_playing_movies(video_id) ON DELETE CASCADE,
+    UNIQUE (user_id, video_id)
 );
 
--- Tabel voor afspeellijsten (Custom Playlists)
+
 CREATE TABLE playlists (
     playlist_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,

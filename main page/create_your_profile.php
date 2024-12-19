@@ -29,6 +29,10 @@
             /* Add space between image and text */
         }
     </style>
+    <?php
+    include_once('../sign_in_up/checkLogin.php');
+    checkLogin();
+    ?>
 </head>
 
 <body class="bg-black text-white h-screen flex items-center justify-center">

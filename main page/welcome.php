@@ -9,7 +9,9 @@
 </head>
 <?php
 include_once '../database/conn.php';
-session_start();
+include_once('../sign_in_up/checkLogin.php');
+checkLogin();
+
 if (isset($_SESSION['user_id'])) {
     $user_id = $_SESSION['user_id'];
 }

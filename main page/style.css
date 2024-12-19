@@ -1,4 +1,4 @@
-/* Slide Controls */
+
 .slide {
     display: none;
 }
@@ -7,7 +7,6 @@
     display: block;
 }
 
-/* Slideshow Styling */
 #slideshow {
     position: relative;
     width: 100%;
@@ -16,7 +15,7 @@
     border-radius: 8px;
 }
 
-/* Each slide */
+
 .slide {
     position: relative;
     height: 100%;
@@ -25,19 +24,17 @@
     transition: opacity 0.7s ease-in-out;
 }
 
-/* Move information to the bottom left */
+
 .slide .info-box {
     position: absolute;
     bottom: 20px;
     left: 20px;
     padding: 20px;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-    /* Subtle gradient */
     border-radius: 8px;
     max-width: 600px;
 }
 
-/* Remove the solid background, enhance text */
 .slide h2 {
     font-size: 3rem;
     font-weight: bold;
@@ -52,7 +49,7 @@
     line-height: 1.6;
 }
 
-/* Rating and popularity styling */
+
 .slide .info-stats {
     display: flex;
     justify-content: space-between;
@@ -60,7 +57,7 @@
     color: #ccc;
 }
 
-/* Watch Trailer Button Styling */
+
 .slide .watch-trailer {
     display: inline-block;
     padding: 12px 24px;
@@ -77,11 +74,9 @@
     background-color: #2563eb;
 }
 
-/* Slide Control Buttons */
 #prev,
 #next {
     background-color: rgba(0, 0, 0, 0.5);
-    /* Semi-transparent buttons */
     transition: background-color 0.3s ease;
 }
 
@@ -90,7 +85,6 @@
     background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Pagination dots */
 .dot {
     background-color: gray;
     transition: background-color 0.3s ease;
@@ -98,10 +92,8 @@
 
 .dot.bg-indigo-600 {
     background-color: #6366f1;
-    /* Adjusted to a cleaner shade of indigo */
 }
 
-/* Media Query for Responsiveness */
 @media (max-width: 768px) {
     .slide .info-box {
         max-width: 100%;
@@ -119,3 +111,20 @@
     }
 }
 
+.favorite-icon {
+    /* Default state */
+    background-color: transparent;
+    border-radius: 50%;
+    padding: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.favorite-icon.favorited {
+    /* Highlighted state */
+    background-color: yellow;
+    /* Change this to the exact shade if needed */
+    border: 2px solid yellow;
+    /* Border matching the background */
+    border-radius: 50%;
+    padding: 4px;
+}
