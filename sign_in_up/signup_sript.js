@@ -45,3 +45,59 @@
             alert("Please select a subscription before proceeding.");
         }
     }
+
+
+    var visaOption = document.getElementById("visaOption");
+    var visaForm = document.getElementById("visaForm");
+
+    var mastercardOption = document.getElementById("mastercardOption");
+    var mastercardForm = document.getElementById("mastercardForm");
+
+    var idealOption = document.getElementById("idealOption");
+    var idealForm = document.getElementById("idealForm");
+
+    // Function to hide all forms
+    function hideForms() {
+        visaForm.classList.add("hidden");
+        mastercardForm.classList.add("hidden");
+        idealForm.classList.add("hidden");
+    }
+
+    // Add event listeners for Visa radio button
+    visaOption.addEventListener("change", function () {
+        if (this.checked) {
+            hideForms(); // Hide all forms
+            visaForm.classList.remove("hidden"); // Show Visa form
+        }
+    });
+
+    // Add event listeners for Mastercard radio button
+    mastercardOption.addEventListener("change", function () {
+        if (this.checked) {
+            hideForms(); // Hide all forms
+            mastercardForm.classList.remove("hidden"); // Show Mastercard form
+        }
+    });
+
+    // Add event listeners for iDEAL radio button
+    idealOption.addEventListener("change", function () {
+        if (this.checked) {
+            hideForms(); // Hide all forms
+            idealForm.classList.remove("hidden"); // Show iDEAL form
+        }
+    });
+
+    // Add event listener to hide all forms when no option is selected
+    document
+        .querySelectorAll('input[name="payment"]')
+        .forEach(function (radio) {
+            radio.addEventListener("change", function () {
+                if (
+                    !visaOption.checked &&
+                    !mastercardOption.checked &&
+                    !idealOption.checked
+                ) {
+                    hideForms(); // Hide all forms when no option is selected
+                }
+            });
+        });

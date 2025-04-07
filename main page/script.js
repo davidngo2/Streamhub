@@ -5,17 +5,17 @@ const dots = document.querySelectorAll(".dot");
 function showSlide(index) {
     slides.forEach((slide, i) => {
         // Reset all classes first
-        slide.classList.remove('active', 'prev', 'next');
-        
+        slide.classList.remove("active", "prev", "next");
+
         // If it's the current slide, make it 'active'
         if (i === index) {
-            slide.classList.add('active');
-        } 
+            slide.classList.add("active");
+        }
         // Handle previous and next slides for animation
         else if (i === (index - 1 + slides.length) % slides.length) {
-            slide.classList.add('prev'); // Previous slide (to the left)
+            slide.classList.add("prev"); // Previous slide (to the left)
         } else if (i === (index + 1) % slides.length) {
-            slide.classList.add('next'); // Next slide (to the right)
+            slide.classList.add("next"); // Next slide (to the right)
         }
     });
 
@@ -48,8 +48,6 @@ showSlide(slideIndex);
 
 // Auto slideshow
 setInterval(nextSlide, 10000);
-
-
 
 // JavaScript to handle 'action' in the response
 document.addEventListener("DOMContentLoaded", () => {
@@ -95,13 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-
-
-
-
-
-
-
 function toggleDropdown(event) {
     event.stopPropagation(); // Prevents the click event from reaching the window.onclick
     const dropdown = document.getElementById("profileDropdown");
@@ -124,3 +115,30 @@ window.onclick = function (event) {
         dropdown.classList.add("hidden"); // Hide dropdown if it's visible and click is outside
     }
 };
+
+function handleAddToPlaylist(videoId) {
+    // Send the video ID to the server using fetch
+    fetch("add_to_playlist.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ video_id: videoId }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.success) {
+                // Alert the user on success
+                alert("The video has been added to your playlist.");
+            } else {
+                // Alert the user on failure
+                alert(
+                    "Failed to add the video to your playlist. Please try again."
+                );
+            }
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            alert("An error occurred. Please try again.");
+        });
+}

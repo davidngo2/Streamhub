@@ -33,7 +33,9 @@ if ($film_id) {
     <header class="bg-gray-800 h-24 mb-10 shadow-lg">
         <div class="container mx-auto flex justify-between items-center h-full px-6">
             <!-- Logo -->
-            <img src="../img/logo.png" alt="Streamhub Logo" class="w-32 h-32">
+            <a href="home.php">
+                <img src="../img/logo.png" alt="Streamhub Logo" class="w-32 h-32">
+            </a>
 
             <!-- Navigation -->
             <nav class="flex items-center space-x-6 text-lg font-medium">
@@ -62,7 +64,34 @@ if ($film_id) {
     <!-- Movie Details -->
     <main class="container mx-auto px-6">
         <?php if ($movie) : ?>
+            <!-- Trailer -->
+            <section class="mt-12">
+                <h2 class="text-2xl font-semibold mb-6">Watch Trailer</h2>
+                <div>
+                    <iframe
+                        src="https://www.youtube.com/embed/<?= htmlspecialchars($movie['video_key']) ?>"
+                        class="rounded-lg shadow-lg"
+                        frameborder="0"
+                        width="60%"
+                        height="500px"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </section>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <!-- Movie Info -->
+                <div>
+                    <h1 class="text-4xl font-extrabold mb-6"><?= htmlspecialchars($movie['title']) ?></h1>
+                    <p class="text-gray-300 mb-4"><strong>Release Date:</strong> <?= htmlspecialchars($movie['release_date']) ?></p>
+                    <p class="text-gray-300 mb-4"><strong>Language:</strong> <?= htmlspecialchars($movie['original_language']) ?></p>
+                    <p class="text-gray-300 mb-4"><strong>Genres:</strong> <?= htmlspecialchars($movie['genre_names']) ?></p>
+                    <p class="mb-6"><?= htmlspecialchars($movie['overview']) ?></p>
+                    <p class="text-yellow-500"><strong>Rating:</strong> <?= htmlspecialchars($movie['vote_average']) ?></p>
+                    <p>(<?= htmlspecialchars($movie['vote_count']) ?> votes)</p>
+                </div>
+            </div>
             <div id="filmContainer" class="mt-20">
+                <h1 class="text-3xl">Watch Movie</h1>
                 <iframe
                     id="filmFrame"
                     src="https://vidsrc.me/"
@@ -74,30 +103,6 @@ if ($film_id) {
                     allowfullscreen>
                 </iframe>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <!-- Movie Info -->
-                <div>
-                    <h1 class="text-4xl font-extrabold mb-6"><?= htmlspecialchars($movie['title']) ?></h1>
-                    <p class="text-gray-300 mb-4"><strong>Release Date:</strong> <?= htmlspecialchars($movie['release_date']) ?></p>
-                    <p class="text-gray-300 mb-4"><strong>Language:</strong> <?= htmlspecialchars($movie['original_language']) ?></p>
-                    <p class="text-gray-300 mb-4"><strong>Genres:</strong> <?= htmlspecialchars($movie['genre_names']) ?></p>
-                    <p class="mb-6"><?= htmlspecialchars($movie['overview']) ?></p>
-                    <p class="text-yellow-500"><strong>Rating:</strong> <?= htmlspecialchars($movie['vote_average']) ?></p> <p>(<?= htmlspecialchars($movie['vote_count']) ?> votes)</p>
-                </div>
-            </div>
-
-            <!-- Trailer -->
-            <section class="mt-12">
-                <h2 class="text-2xl font-semibold mb-6">Watch Trailer</h2>
-                <div class="aspect-w-16 aspect-h-9">
-                    <iframe
-                        src="https://www.youtube.com/embed/<?= htmlspecialchars($movie['video_key']) ?>"
-                        class="rounded-lg shadow-lg"
-                        frameborder="0"
-                        allowfullscreen>
-                    </iframe>
-                </div>
-            </section>
         <?php else : ?>
             <p class="text-center text-red-500 mt-12">Movie not found or invalid ID provided.</p>
         <?php endif; ?>

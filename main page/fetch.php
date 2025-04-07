@@ -16,6 +16,11 @@ function fetchMoviesHTML($user_id, $conn)
             $stmt->execute(['user_id' => $user_id]);
             $movies = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+            // Check if user has any playlists
+            $playlistStmt = $conn->prepare("SELECT COUNT(*) AS playlist_count FROM playlists WHERE user_id = :user_id");
+            $playlistStmt->execute(['user_id' => $user_id]);
+            $hasPlaylists = $playlistStmt->fetch(PDO::FETCH_ASSOC)['playlist_count'] > 0;
+
             if ($movies) {
                 foreach ($movies as $movie) {
                     // Add 'favorited' class if the movie is in favorites
@@ -46,6 +51,13 @@ function fetchMoviesHTML($user_id, $conn)
                                 </div>
                             </div>
                         </a>
+                        
+                        <!-- Add to Playlist Button -->
+                        <button 
+                            class="absolute bottom-2 right-2 bg-blue-500 text-white py-1 px-3 rounded text-sm" 
+                            onclick="handleAddToPlaylist(\'' . htmlspecialchars($movie['video_id'], ENT_QUOTES) . '\')">
+                            Add to Playlist
+                        </button>
                     </div>';
                 }
             } else {
@@ -58,3 +70,4 @@ function fetchMoviesHTML($user_id, $conn)
         echo '<p class="text-red-500">Please log in to see your favorite movies.</p>';
     }
 }
+?>

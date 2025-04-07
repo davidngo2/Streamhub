@@ -20,7 +20,9 @@ include_once 'fetch.php';
     <header class="bg-gray-800 h-24 mb-10 flex items-center">
         <div class="container mx-auto flex justify-between items-center">
             <!-- Logo -->
-            <img src="../img/logo.png" alt="Streamhub Logo" class="w-32 h-32">
+            <a href="home.php">
+                <img src="../img/logo.png" alt="Streamhub Logo" class="w-32 h-32">
+            </a>
 
             <!-- Navigation -->
             <nav class="flex items-center space-x-6 text-lg font-semibold">
@@ -29,7 +31,8 @@ include_once 'fetch.php';
                 <a href="#film-grid2" class="hover:text-gray-400">Movies</a>
                 <a href="#film-grid1" class="hover:text-gray-400">Upcoming</a>
                 <a href="#my-list" class="hover:text-gray-400">My List</a>
-                
+                <a href="filter.php" class="hover:text-gray-400">Filter</a>
+
                 <!-- Profile Button -->
                 <div class="relative">
                     <button class="focus:outline-none" id="profileButton">
@@ -45,7 +48,7 @@ include_once 'fetch.php';
             </nav>
         </div>
     </header>
-    
+
     <h1 class="text-4xl font-semibold mb-8">Top 10</h1>
     <div id="slideshow" class="relative mx-auto h-[600px] mb-12 overflow-hidden rounded-lg shadow-lg">
         <?php
@@ -96,6 +99,7 @@ include_once 'fetch.php';
             <?php fetchMoviesHTML($user_id, $conn); ?>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 

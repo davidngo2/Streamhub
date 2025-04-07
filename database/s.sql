@@ -77,13 +77,12 @@ CREATE TABLE playlists (
 );
 
 -- Tabel voor video's in afspeellijsten (Videos in Playlists) - n-op-n relatie
-CREATE TABLE playlist_videos (
-    playlist_video_id INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE playlist_movies (
+    id INT AUTO_INCREMENT PRIMARY KEY,
     playlist_id INT,
-    video_id INT,
+    video_id VARCHAR(255),
     added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (playlist_id) REFERENCES playlists(playlist_id) ON DELETE CASCADE,
-    FOREIGN KEY (video_id) REFERENCES now_playing_movies(video_id) ON DELETE CASCADE
+    FOREIGN KEY (playlist_id) REFERENCES playlists(playlist_id) ON DELETE CASCADE
 );
 
 -- Tabel voor video's bekeken door gebruikers (User Watch History)

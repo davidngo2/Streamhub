@@ -13,20 +13,14 @@
 
         .dropdown-content {
             width: 64;
-            /* Increase width */
             left: -10px;
-            /* Move to the left */
         }
 
         .dropdown-content ul li img {
             width: 32px;
-            /* Set image width */
             height: 32px;
-            /* Set image height */
             border-radius: 50%;
-            /* Make image rounded */
             margin-right: 8px;
-            /* Add space between image and text */
         }
     </style>
     <?php
@@ -64,18 +58,14 @@
             </div>
 
             <form action="" method="post" class="flex-grow">
-                <!-- Name Input -->
                 <div class="flex items-center mb-4">
                     <input type="text" placeholder="Kids" class="bg-gray-700 text-white py-2 px-4 rounded w-full focus:outline-none focus:ring-2 focus:ring-red-600">
-
-                    <!-- Kid Checkbox -->
                     <div class="flex items-center ml-4">
                         <input type="checkbox" id="kid" class="form-checkbox text-red-600 w-5 h-5">
                         <label for="kid" class="ml-2 text-gray-400">Kid?</label>
                     </div>
                 </div>
 
-                <!-- Buttons -->
                 <div class="flex space-x-4">
                     <button type="submit" class="bg-red-600 py-2 px-6 rounded text-white hover:bg-red-700 focus:ring-2 focus:ring-red-600">
                         Continue
